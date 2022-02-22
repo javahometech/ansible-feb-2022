@@ -1,0 +1,17 @@
+- hosts: 172.31.41.15
+  become: True
+  tasks:
+    - name: install apache server
+      yum:
+        name: httpd
+        state: present
+    - name: copy webite files on to apache
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+    - name: start and enable apache
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+   
